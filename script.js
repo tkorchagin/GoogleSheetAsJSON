@@ -22,17 +22,7 @@ function showSheetAsJson() {
     for (var j = 0; j < headers.length; j++) {
       // Special handling for "AnswerVariants" column
       if (headers[j] === "AnswerVariants") {
-        // Check if the cell is not empty
-        if (row[j].trim() !== "") {
-          // Convert the string to an array of strings
-          rowData[headers[j]] = row[j].split(',').map(function(item) {
-            // Trim spaces and remove surrounding quotes if present
-            return item.trim().replace(/^"|"$/g, '');
-          });
-        } else {
-          // Assign an empty array if the cell is empty
-          rowData[headers[j]] = [];
-        }
+        rowData[headers[j]] = parseQuotedStrings(row[j]);
       } else {
         rowData[headers[j]] = row[j];
       }
@@ -50,4 +40,31 @@ function showSheetAsJson() {
     SpreadsheetApp.getUi().alert('The JSON data is too large to display in an alert. Please check the logs.');
     console.log(jsonData); // Fallback to logging
   }
+}
+
+// Function to parse quoted strings correctly, including commas within quotes
+function parseQuotedStrings(input) {
+  var result = [];
+  var current = '';
+  var inQuotes = false;
+
+  for (var i = 0; i < input.length; i++) {
+    var char = input[i];
+    if (char === '"' && input[i - 1] !== '\\') { // Ignore escaped quotes
+      inQuotes = !inQuotes;
+    } else if (char === ',' && !inQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  if (current) {
+    result.push(current.trim());
+  }
+
+  // Remove quotes from the beginning and end of each string
+  return result.map(function(str) {
+    return str.replace(/^"|"$/g, '');
+  });
 }
