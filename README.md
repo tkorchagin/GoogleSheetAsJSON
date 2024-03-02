@@ -21,23 +21,27 @@ Open the Google Sheet you want to work with.
 - Copy the entire script from the `script.js` file in this GitHub repository.
 - Paste the copied script into the Apps Script editor.
 
-### Step 4: Save and Name Your Project
+### Step 4: Add the Custom Menu to Your Sheet
 
-- Click on **File** > **Save**, or click the disk icon to save your script.
-- Give your project a name when prompted.
+To add the custom menu to your Google Sheet, simply save your script and then reload the page with your Google Sheet:
 
-### Step 5: Add the Custom Menu to Your Sheet
+1. **Save the Script:**
+   - After pasting the script into the Apps Script editor, click on **File** > **Save**, or click the disk icon to save your script.
+   - Give your project a name when prompted.
 
-- Run the `onOpen` function once manually to create the custom menu in your Google Sheet:
-  - Click on the function dropdown menu next to the bug icon and select `onOpen`.
-  - Click the play icon (▶️) to run the function.
-- You might be prompted to authorize the script to access your Google Sheets data. Follow the prompts to grant the necessary permissions.
+2. **Reload Your Google Sheet:**
+   - Close the Apps Script editor and go back to your Google Sheet tab.
+   - Reload the page with your Google Sheet (you can press `Ctrl + R` on Windows or `Cmd + R` on Mac, or simply click the reload button in your browser).
 
-### Step 6: Use the Script
+3. **Access the Custom Menu:**
+   - After the page reloads, you should see a new menu item titled "Custom Menu" at the end of the standard menu bar in your Google Sheet. This indicates that the script has been successfully added and is ready to use.
 
-- Return to your Google Sheet, and you should see a new menu item titled "Custom Menu" at the end of the standard menu.
-- Click on "Custom Menu" and select "Show Sheet as JSON" to run the script.
+### Step 5: Use the Script
+
+- To convert your sheet's data to JSON format, click on "Custom Menu" and select "Show Sheet as JSON".
 - The script will process the sheet's data and display the JSON in an alert dialog or log it if the data is too large.
+
+By following these revised instructions, you eliminate the need to manually run the `onOpen` function from the script editor, making the process more straightforward for users. The custom menu will automatically appear in the Google Sheets UI after the page is reloaded.
 
 ## Important Notes
 
